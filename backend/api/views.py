@@ -1,10 +1,12 @@
 from rest_framework.response import Response
 
-from .models import DayDairy
-from .serializers import DayDairySerializer
-from .filters import DayDairyFilter
-from .paginations import DayDairyPagination
+from .models import DayDairy, FoodEntity, FoodRecord
+from .serializers import DayDairySerializer, FoodEntitySerializer, FoodRecordSerializer
+from .filters import DayDairyFilter, FoodEntityOrderingFilter
+from .paginations import DayDairyPagination, FoodModelsPagination
 
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
@@ -53,6 +55,18 @@ def nutrient_expression(field):
     )
 
 
+def get_nutrient(field):
+    return ExpressionWrapper(
+        F("grams")
+        * F(f"food_base__{field}")
+        / Value(Decimal("100")),
+        output_field=DecimalField(
+            max_digits=10,
+            decimal_places=2,
+        )
+    )
+
+
 class DayDairyViewSet(ModelViewSet):
     serializer_class = DayDairySerializer
     permission_classes = [IsAuthenticated]
@@ -67,7 +81,7 @@ class DayDairyViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = DayDairy.objects.filter(
             owner=self.request.user,
-        )
+        ).order_by('-create_date')
 
         # Применение новых высчитанных полей (белок, калории, клетчатка и т.д.)
         queryset = queryset.annotate(
@@ -92,6 +106,12 @@ class DayDairyViewSet(ModelViewSet):
             )
 
         return queryset
+
+    # Переписываю поведение сохранения модели
+    def perform_create(self, serializer):
+        serializer.save(
+            owner=self.request.user
+        )
 
     
     # Информационная плашка для дат предоставляемых данных
@@ -133,3 +153,99 @@ class DayDairyViewSet(ModelViewSet):
             )
 
         return "Период не указан"
+
+
+class FoodEntityViewSet(ModelViewSet):
+    serializer_class = FoodEntitySerializer
+    permission_classes = [IsAuthenticated]
+
+    pagination_class = FoodModelsPagination
+
+    parser_classes = (
+        MultiPartParser,
+        FormParser,
+        JSONParser,
+    )
+
+    filter_backends = (
+        SearchFilter,
+        FoodEntityOrderingFilter,
+    )
+
+    search_fields = (
+        "name",
+        "description",
+    )
+
+    ordering_fields = (
+        ("name", "Название"),
+        ("calories", "Калории"),
+        ("proteins", "Белок"),
+        ("fats", "Жиры"),
+        ("carbs", "Углеводы"),
+        ("create_date", "Дата создания"),
+    )
+
+    ordering = ("-create_date",)
+
+    def get_queryset(self):
+        return FoodEntity.objects.filter(
+            creator=self.request.user
+        )
+
+    def perform_create(self, serializer):
+        serializer.save(
+            creator=self.request.user
+        )
+
+
+class FoodRecordViewSet(ModelViewSet):
+    serializer_class = FoodRecordSerializer
+    permission_classes = [IsAuthenticated]
+
+    pagination_class = FoodModelsPagination
+
+    parser_classes = (
+        MultiPartParser,
+        FormParser,
+        JSONParser,
+    )
+
+    filter_backends = (
+        SearchFilter,
+        FoodEntityOrderingFilter,
+    )
+
+    search_fields = (
+        "name",
+        "description",
+    )
+
+    ordering_fields = (
+        ("name", "Название"),
+        ("calories", "Калории"),
+        ("proteins", "Белок"),
+        ("fats", "Жиры"),
+        ("carbs", "Углеводы"),
+        ("create_date", "Дата создания"),
+    )
+
+    ordering = ("-create_date",)
+
+
+    def get_queryset(self):
+        user_food_record = FoodRecord.objects.filter(
+            day_dairy__owner=self.request.user
+        )
+
+        return (
+            user_food_record
+            .select_related("food_base")
+            .annotate(
+                total_proteins=get_nutrient("proteins"),
+                total_fats=get_nutrient("fats"),
+                total_carbs=get_nutrient("carbs"),
+                total_fibers=get_nutrient("fibers"),
+                total_calories=get_nutrient("calories"),
+            )
+        )

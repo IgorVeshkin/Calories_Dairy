@@ -25,10 +25,23 @@ from .views import *
 
 
 router = DefaultRouter()
+
 router.register(
     "dairy",
     DayDairyViewSet,
     basename="dairy"
+)
+
+router.register(
+    "foods",
+    FoodEntityViewSet,
+    basename="foods",
+)
+
+router.register(
+    "food-records",
+    FoodRecordViewSet,
+    basename="food-records",
 )
 
 urlpatterns = [

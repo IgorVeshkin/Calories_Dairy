@@ -140,7 +140,7 @@ class FoodRecordAdmin(admin.ModelAdmin):
     
     @admin.display(description="Дата", ordering="create_date")
     def created_at(self, obj):
-        return obj.create_date.strftime("%d.%m.%Y")
+        return obj.create_date.strftime("%d.%m.%Y %H:%M:%S")
 
 
 

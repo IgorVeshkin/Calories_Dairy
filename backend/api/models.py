@@ -25,7 +25,7 @@ class FoodEntity(BaseModel):
     fats = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Жиры')
     carbs = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Углеводы')
     fibers = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Клетчатка')
-    calories = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Калории')
+    calories = models.DecimalField(max_digits=8, decimal_places=1, verbose_name='Калории')
 
     creator =  models.ForeignKey(
         User,
