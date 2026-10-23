@@ -217,16 +217,16 @@ class FoodRecordViewSet(ModelViewSet):
     )
 
     search_fields = (
-        "name",
-        "description",
+        "food_base__name",
     )
 
     ordering_fields = (
-        ("name", "Название"),
-        ("calories", "Калории"),
-        ("proteins", "Белок"),
-        ("fats", "Жиры"),
-        ("carbs", "Углеводы"),
+        ("food_base__name", "Название"),
+        ("grams", "Граммы"),
+        ("total_calories", "Калории"),
+        ("total_proteins", "Белок"),
+        ("total_fats", "Жиры"),
+        ("total_carbs", "Углеводы"),
         ("create_date", "Дата создания"),
     )
 
