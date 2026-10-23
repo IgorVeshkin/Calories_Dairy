@@ -1,0 +1,466 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$wva65uICaqA86wmoeiPQ9C$tgnf5NT0djrfNVxIdjxOu6szEQWnfKY7Qw2cOveZGoE=",
+    "last_login": "2026-10-20T19:53:59.291Z",
+    "is_superuser": true,
+    "username": "igor",
+    "first_name": "Игорь",
+    "last_name": "Вешкин",
+    "email": "igorveshkin.official@yandex.ru",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-09-27T19:46:28Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "25vq2l16ee7umgq1lhv0ax9mv8cm6ewy",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyFAu1vw6L3fQJaySNVAUtqT8d9tkx70OPPezFt42tbst8aLn6O4Ci0uv12g6cnlAPFB5V7lVMu6zEEeijxpk2ON_Lqd7t9Bppb39QTaRlLBRiTjSDNgn1wAozWazilWgxtsBIXAlFIX0h4wgLI9aYcgPl_WOjdM:1xGLyE:kHFEsXwet4hQ_w9rOem8Am80MFI8NFuAnjNYHVksEUA",
+    "expire_date": "2026-10-26T19:46:02.062Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vvvst619pekjnqg4bzcgdmjogldyht65",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyFAu1vw6L3fQJaySNVAUtqT8d9tkx70OPPezFt42tbst8aLn6O4Ci0uv12g6cnlAPFB5V7lVMu6zEEeijxpk2ON_Lqd7t9Bppb39QTaRlLBRiTjSDNgn1wAozWazilWgxtsBIXAlFIX0h4wgLI9aYcgPl_WOjdM:1xAupy:kaV0LPXbEsyD-DCLREqsEa7p-_bfMMAnSoRKRQ8Rvak",
+    "expire_date": "2026-10-11T19:47:02.142Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yt8wd4672v3dxh78ypxiuclphie1aikv",
+  "fields": {
+    "session_data": ".eJxVjMEOwiAQRP-FsyFAu1vw6L3fQJaySNVAUtqT8d9tkx70OPPezFt42tbst8aLn6O4Ci0uv12g6cnlAPFB5V7lVMu6zEEeijxpk2ON_Lqd7t9Bppb39QTaRlLBRiTjSDNgn1wAozWazilWgxtsBIXAlFIX0h4wgLI9aYcgPl_WOjdM:1xJFuJ:YJQ3ldz-v5kBRmX0c9Af50eeLNvXCTK8NDelpNHXWT8",
+    "expire_date": "2026-11-03T19:53:59.301Z"
+  }
+},
+{
+  "model": "api.foodentity",
+  "pk": "276adc33-0e42-4e5b-b60c-45138c6f1d70",
+  "fields": {
+    "create_date": "2026-09-29T17:38:49.206Z",
+    "update_date": "2026-09-29T17:38:49.206Z",
+    "name": "Киви с кожурой",
+    "description": "",
+    "image": "users/1/foods/Киви с кожурой/Киви_с_кожурой.jpg",
+    "proteins": "1.10",
+    "fats": "0.50",
+    "carbs": "11.70",
+    "fibers": "3.50",
+    "calories": "61.0",
+    "creator": [
+      "igor"
+    ]
+  }
+},
+{
+  "model": "api.foodentity",
+  "pk": "b1aeefd2-876e-4dbd-bc84-0a9010153dc2",
+  "fields": {
+    "create_date": "2026-09-29T16:15:56.736Z",
+    "update_date": "2026-09-29T17:33:24.059Z",
+    "name": "Гречка 'Селяночка'",
+    "description": "Хлопья быстрого приготовления",
+    "image": "users/1/foods/Гречка 'Селяночка'/Гречка_коробка_0t0v9ym.jpg",
+    "proteins": "11.00",
+    "fats": "2.00",
+    "carbs": "74.00",
+    "fibers": "9.00",
+    "calories": "360.0",
+    "creator": [
+      "igor"
+    ]
+  }
+},
+{
+  "model": "api.foodrecord",
+  "pk": "3843f5a3-4204-4cf1-9180-81068a1a2f91",
+  "fields": {
+    "create_date": "2026-09-29T17:39:33.528Z",
+    "update_date": "2026-09-29T17:39:33.528Z",
+    "food_base": "276adc33-0e42-4e5b-b60c-45138c6f1d70",
+    "grams": "119",
+    "day_dairy": "6794a443-0d94-4722-badf-3158febb4b66"
+  }
+},
+{
+  "model": "api.foodrecord",
+  "pk": "ce75cf09-6daa-4d04-9dd8-64583bd032ac",
+  "fields": {
+    "create_date": "2026-09-29T16:16:59.573Z",
+    "update_date": "2026-09-29T16:16:59.573Z",
+    "food_base": "b1aeefd2-876e-4dbd-bc84-0a9010153dc2",
+    "grams": "120",
+    "day_dairy": "6794a443-0d94-4722-badf-3158febb4b66"
+  }
+},
+{
+  "model": "api.daydairy",
+  "pk": "3ec0dd27-4800-4959-8007-13a7c88dd164",
+  "fields": {
+    "create_date": "2026-10-08T16:56:43.068Z",
+    "update_date": "2026-10-08T16:56:43.068Z",
+    "title": "Суточное потребление 08.10.2026",
+    "description": "",
+    "owner": [
+      "igor"
+    ]
+  }
+},
+{
+  "model": "api.daydairy",
+  "pk": "6794a443-0d94-4722-badf-3158febb4b66",
+  "fields": {
+    "create_date": "2026-09-29T16:16:48.227Z",
+    "update_date": "2026-09-29T16:16:48.227Z",
+    "title": "Суточное потребление 29.09.2026",
+    "description": "",
+    "owner": [
+      "igor"
+    ]
+  }
+},
+{
+  "model": "api.daydairy",
+  "pk": "896e9939-4ccf-4905-9b66-b52d6feaaa5e",
+  "fields": {
+    "create_date": "2026-10-16T18:52:04.608Z",
+    "update_date": "2026-10-16T18:52:04.608Z",
+    "title": "Суточное потребление 16.10.2026",
+    "description": "",
+    "owner": [
+      "igor"
+    ]
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-09-27T20:16:20.501Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "7ae264d5-befc-4f90-a4cf-7c6958df64bb",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, Ккал-360",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-09-27T20:25:34.417Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "f7f38a60-1131-4792-86f9-279e61ea603d",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, Ккал-360",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-09-27T20:26:14.678Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodrecord"
+    ],
+    "object_id": "18003b6a-bb02-4904-80f3-5cf8e91883b3",
+    "object_repr": "FoodRecord object (18003b6a-bb02-4904-80f3-5cf8e91883b3)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-09-28T18:52:20.360Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "457d24d6-5757-4afe-9987-95a4a587dcdd",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, Ккал-360",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-09-28T18:53:40.596Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodrecord"
+    ],
+    "object_id": "2d105ff5-441e-4078-b856-07fc877ddfc7",
+    "object_repr": "28.09.2026 | Гречка 'Селяночка' 120 грамм: 432.00 ккал",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-09-29T16:15:56.741Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "b1aeefd2-876e-4dbd-bc84-0a9010153dc2",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, К-11 Ккал-360",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-09-29T16:16:48.232Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "daydairy"
+    ],
+    "object_id": "6794a443-0d94-4722-badf-3158febb4b66",
+    "object_repr": "DayDairy object (6794a443-0d94-4722-badf-3158febb4b66)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-09-29T16:16:59.579Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodrecord"
+    ],
+    "object_id": "ce75cf09-6daa-4d04-9dd8-64583bd032ac",
+    "object_repr": "29.09.2026 | Гречка 'Селяночка' 120 грамм: 432.0 ккал",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-09-29T17:19:13.529Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "b1aeefd2-876e-4dbd-bc84-0a9010153dc2",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, К-9, Ккал-360",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u041a\\u043b\\u0435\\u0442\\u0447\\u0430\\u0442\\u043a\\u0430\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-09-29T17:33:05.190Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "b1aeefd2-876e-4dbd-bc84-0a9010153dc2",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, К-9, Ккал-360",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-09-29T17:33:24.067Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "b1aeefd2-876e-4dbd-bc84-0a9010153dc2",
+    "object_repr": "Гречка 'Селяночка' | Б-11г, Ж-2г, У-74г, К-9, Ккал-360",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u0435\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-09-29T17:38:49.209Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodentity"
+    ],
+    "object_id": "276adc33-0e42-4e5b-b60c-45138c6f1d70",
+    "object_repr": "Киви с кожурой | Б-1г, Ж-0г, У-12г, К-4, Ккал-61",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-09-29T17:39:33.535Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "foodrecord"
+    ],
+    "object_id": "3843f5a3-4204-4cf1-9180-81068a1a2f91",
+    "object_repr": "29.09.2026 | Киви с кожурой 119 грамм: 72.6 ккал",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-09-29T23:04:33.141Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "daydairy"
+    ],
+    "object_id": "364dd7f2-2b95-44fb-899c-32048bfe58e9",
+    "object_repr": "29.09.2026 | Суточное потребление 30.09.2026",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-09-29T23:05:17.856Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "daydairy"
+    ],
+    "object_id": "364dd7f2-2b95-44fb-899c-32048bfe58e9",
+    "object_repr": "29.09.2026 | Суточное потребление 30.09.2026",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-10-08T16:56:43.073Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "daydairy"
+    ],
+    "object_id": "3ec0dd27-4800-4959-8007-13a7c88dd164",
+    "object_repr": "08.10.2026 | Суточное потребление 08.10.2026",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-10-14T18:55:52.918Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ],
+    "object_id": "1",
+    "object_repr": "igor",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-10-16T18:52:04.611Z",
+    "user": [
+      "igor"
+    ],
+    "content_type": [
+      "api",
+      "daydairy"
+    ],
+    "object_id": "896e9939-4ccf-4905-9b66-b52d6feaaa5e",
+    "object_repr": "16.10.2026 | Суточное потребление 16.10.2026",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+}
+]

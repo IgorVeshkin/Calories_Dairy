@@ -1,0 +1,131 @@
+# Командная строка psql
+
+psql -U postgres -h localhost
+
+
+# Настройка базы данных и пользователя
+
+CREATE USER dairy_db_owner WITH PASSWORD 'igor_test_1234';
+CREATE DATABASE calories_dairy OWNER dairy_db_owner;
+
+ALTER USER dairy_db_owner WITH LOGIN CREATEDB;
+ALTER DATABASE calories_dairy OWNER TO dairy_db_owner;
+
+
+# Удаление базы данных и пользователя
+
+DROP DATABASE calories_dairy;
+DROP USER dairy_db_owner;
+
+
+# Запуск базы данных
+
+\c calories_dairy
+
+
+# Таблицы в базе данных
+
+\dt 
+
+
+# Показ списка баз данны
+
+\list 
+\l
+
+
+# Выход из базы данных
+\q
+
+
+# Список пользователей
+
+\du
+
+
+# Предоставление доступа к схеме public, чтобы django не выдавал ошибку миграций
+
+GRANT ALL ON schema public TO dairy_db_owner;
+
+
+# Предоставление всех полномочий для работы пользователя с базой данных
+
+GRANT ALL PRIVILEGES ON DATABASE "calories_dairy" TO dairy_db_owner;
+
+
+
+
+# Настройка postgresql в django-проекте
+
+
+# Установка компанентов движка, через который будет работать django с postgresql
+
+(venv) .... > pip install psycopg2
+
+(venv) .... > pip install "psycopg[binary]"
+
+
+# Создание dump-а базы данных sqlite3 с переносом данных в postgresql
+
+(venv) .... > python manage.py migrate
+(venv) .... > python -Xutf8 manage.py dumpdata -o data.json
+
+# или, если необходимо сформировать файл без данных contenttypes и auth.permission
+
+(venv) .... > python manage.py dumpdata --natural-foreign --natural-primary --exclude contenttypes --exclude auth.permission --indent 2 --output data.json
+
+
+# В settings.py указываем данные для подключения к postgresql
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "calories_dairy",
+        "USER": "dairy_db_owner",
+        "PASSWORD": "igor_test_1234",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
+
+
+# или
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "calories_dairy",
+        "USER": "dairy_db_owner",
+        "PASSWORD": "igor_test_1234",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
+
+
+# Тестирование соединения
+
+(venv) .... > python manage.py check
+
+
+# Выполняем синхронизацию с postgresql базой данных
+
+(venv) .... > python manage.py migrate --run-syncdb
+
+
+# Загружаем данные из data.json в postgresql базу данных
+
+(venv) .... > python manage.py loaddata data.json
+
+
+# Если на этапе загрузки данных из файла data.json выдает ошибку:
+
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc8 in position 274: invalid continuation byte
+
+# Тогда необходимо поменять кодировку:
+
+Нажмите на название кодировки в правом нижнем углу
+Выберите Reopen with Encoding
+Выберите Cyrillic (Windows 1251)
+Если русский текст отображается корректно, снова нажмите на кодировку
+Выберите Save with Encoding → UTF-8
