@@ -14,7 +14,7 @@ def test_create_food_entity(django_user_model):
     )
 
     chicken_image = SimpleUploadedFile(
-        name="apple.jpg",
+        name="ground_chicken.jpg",
         content=b"fake-image-content",
         content_type="image/jpeg",
     )
@@ -69,7 +69,7 @@ def test_create_food_record(django_user_model):
     )
 
     food_image = SimpleUploadedFile(
-        name="apple.jpg",
+        name="ground_chicken.jpg",
         content=b"fake-image-content",
         content_type="image/jpeg",
     )
