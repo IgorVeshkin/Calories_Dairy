@@ -5,6 +5,20 @@ from django.contrib.auth.models import User
 from .models import DayDairy, FoodEntity, FoodRecord
 
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = User
+
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+            "username",
+        )
+
+
 class DayDairySerializer(serializers.ModelSerializer):
 
     total_proteins = serializers.DecimalField(
@@ -51,23 +65,9 @@ class DayDairySerializer(serializers.ModelSerializer):
         )
 
 
-class FoodCreatorSerializer(serializers.ModelSerializer):
-
-    class Meta:
-
-        model = User
-
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-            "username",
-        )
-
-
 class FoodEntitySerializer(serializers.ModelSerializer):
 
-    creator = FoodCreatorSerializer(read_only=True)
+    creator = UserSerializer(read_only=True)
 
     image = serializers.ImageField(
         required=False
