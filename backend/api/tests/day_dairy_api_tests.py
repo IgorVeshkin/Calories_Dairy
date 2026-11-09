@@ -11,6 +11,8 @@ import random
 
 from django.forms.models import model_to_dict
 
+from datetime import datetime, date
+
 
 @pytest.fixture
 def api_client():
@@ -149,7 +151,11 @@ def test_day_dairy_specific(api_client, auth_user, day_dairy_list):
         if db_record_value is None:
             continue
 
-        assert str(value) == str(db_record_value)
+        if isinstance(db_record_value, datetime):
+            received_value = datetime.fromisoformat(value)
+            assert received_value == db_record_value
+        else:
+            assert str(value) == str(db_record_value)
 
 
 @pytest.mark.django_db
@@ -295,3 +301,44 @@ def test_delete_day_dairy(api_client, auth_user, day_dairy):
 
     assert response.status_code == 204
     assert not DayDairy.objects.filter(pk=day_dairy.pk).exists()
+
+
+@pytest.mark.django_db
+def test_filtering_by_date_day_dairy(api_client, auth_user, day_dairy_list):
+    """
+    Проверка фильтрации по датам списка записей для модели DayDairy
+    """
+    
+    # Авторизация пользователя
+    api_client.force_login(auth_user)
+
+
+    date_from = "2026-09-01" # 1 сентября 2026
+    date_to = "2026-11-09" # 9 ноября 2026
+
+    # Проверка /api/dairy/ (если используется Router, тогда "basename"-list)
+    url = reverse("dairy-list")
+    response = api_client.get(
+        url,
+        {
+            "date_from": date_from,
+            "date_to": date_to,
+        },
+    )
+
+
+    expected_keys = {"uuid", "title", "description"}
+
+    # Базовая проверка
+    assert response.status_code == status.HTTP_200_OK
+    assert isinstance(response.data, list) or "results" in response.data
+    assert len(response.data["results"]) != 0
+
+    # Проверка: входят ли определенные ключи в результат запроса и входят ли в указаный диапазон дат
+    for item in response.data["results"]:
+        assert expected_keys.issubset(item.keys())
+
+        item_create_date = datetime.fromisoformat(item["create_date"]).date()
+
+        assert date.fromisoformat(date_from) <= item_create_date <= date.fromisoformat(date_to)
+
