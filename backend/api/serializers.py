@@ -50,14 +50,6 @@ class DayDairySerializer(serializers.ModelSerializer):
         decimal_places=1,
         read_only=True
     )
-
-    create_date = serializers.DateTimeField(
-        format="%d.%m.%y %H:%M:%S"
-    )
-
-    update_date = serializers.DateTimeField(
-        format="%d.%m.%y %H:%M:%S"
-    )
     
     class Meta:
         model = DayDairy
