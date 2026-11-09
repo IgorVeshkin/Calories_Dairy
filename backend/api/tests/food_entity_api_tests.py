@@ -188,6 +188,39 @@ def test_food_entities_list(api_client, auth_user):
 
 
 @pytest.mark.django_db
+def test_food_entity_specific(api_client, auth_user, food_entity):
+
+    """
+    Проверка GET-запроса для определенной записи модели FoodEntity
+    """
+
+    api_client.force_login(auth_user)
+
+
+    # Проверка /api/foods/<uuid> (если используется Router, тогда "basename"-detail)
+    url = reverse("foods-detail", kwargs={"pk": food_entity.uuid},)
+    response = api_client.get(url)
+
+    received_record = response.data
+
+
+    # Базовая проверка
+    assert response.status_code == status.HTTP_200_OK
+
+
+    db_record = FoodEntity.objects.get(
+        uuid=received_record.get("uuid")
+    )
+
+    assert received_record["name"] == db_record.name
+
+    assert received_record["uuid"] == str(db_record.uuid)
+    assert received_record["creator"]["id"] == db_record.creator.pk
+
+    assert float(received_record["calories"]) == float(db_record.calories)
+
+
+@pytest.mark.django_db
 def test_create_food_entities(api_client, auth_user):
 
     """
@@ -325,7 +358,7 @@ def test_delete_food_entity(api_client, auth_user, food_entity):
     # Авторизация пользователя
     api_client.force_login(auth_user)
 
-    # Создание новой записи через POST-запрос
+    # Удаление записи через DELETE-запрос
     url = reverse("foods-detail", kwargs={"pk": food_entity.uuid},)
 
     response = api_client.delete(url)
@@ -357,7 +390,7 @@ def test_ordering_food_entity(api_client, auth_user, food_entities_list):
     results = response.data.get("results", response.data)
 
 
-    # Отсортированные по через api названия продуктов
+    # Отсортированные через api названия продуктов
     ordered_by_name_api_result = [food_entity["name"] for food_entity in results]
 
     # Отсортированные через Python записи из базы данных
